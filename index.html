@@ -1,517 +1,1132 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Nexus AI Solutions</title>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta content="AI Solutions, AI for Enterprises, Accessibility, AI Secretary" name="keywords">
-  <meta content="Nexus AI Solutions develops cutting-edge AI solutions for enterprises and individuals, revolutionizing dubbing, accessibility, and personal assistance." name="description">
+<title>Nexus AI Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400;1,9..40,500&display=swap" rel="stylesheet">
 
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+<style>
+  :root {
+    --ground: #F5F3EE;
+    --ground-white: #FFFFFF;
+    --ground-dark: #141414;
+    --ground-dark-lifted: #1E1E1E;
+    --red: #1A1A1A;
+    --red-hover: #333333;
+    --red-light: #F0F0F0;
+    --media: #B91C1C;
+    --media-light: #FEF2F2;
+    --teal: #1A7A6A;
+    --teal-light: #E3F2EF;
+    --amber: #D4940A;
+    --amber-light: #FFF7E0;
+    --text: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --text-muted: #8A8A8A;
+    --text-on-dark: #F0EFEC;
+    --text-dim-on-dark: #999;
+    --border: #E0DDD6;
+    --border-dark: #2A2A2A;
+    --btn-solid-bg: #1A1A1A;
+    --btn-solid-bg-hover: #333333;
+    --btn-solid-fg: #FFFFFF;
+    --ff: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700" rel="stylesheet">
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #111111;
+      --ground-white: #1A1A1A;
+      --ground-dark: #0A0A0A;
+      --ground-dark-lifted: #1E1E1E;
+      --red: #F0EFEC;
+      --red-hover: #CCCCCC;
+      --red-light: #252525;
+      --media: #F87171;
+      --media-light: #2A1A1A;
+      --teal: #2AA08C;
+      --teal-light: #162A26;
+      --amber: #E0A820;
+      --amber-light: #2A2410;
+      --text: #F0EFEC;
+      --text-secondary: #A0A0A0;
+      --text-muted: #666;
+      --text-on-dark: #F0EFEC;
+      --text-dim-on-dark: #888;
+      --border: #2A2A2A;
+      --border-dark: #222;
+      --btn-solid-bg: #F0EFEC;
+      --btn-solid-bg-hover: #CCCCCC;
+      --btn-solid-fg: #111111;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #111111;
+    --ground-white: #1A1A1A;
+    --ground-dark: #0A0A0A;
+    --ground-dark-lifted: #1E1E1E;
+    --red: #F0EFEC;
+    --red-hover: #CCCCCC;
+    --red-light: #252525;
+    --media: #F87171;
+    --media-light: #2A1A1A;
+    --teal: #2AA08C;
+    --teal-light: #162A26;
+    --amber: #E0A820;
+    --amber-light: #2A2410;
+    --text: #F0EFEC;
+    --text-secondary: #A0A0A0;
+    --text-muted: #666;
+    --text-on-dark: #F0EFEC;
+    --text-dim-on-dark: #888;
+    --border: #2A2A2A;
+    --border-dark: #222;
+    --btn-solid-bg: #F0EFEC;
+    --btn-solid-bg-hover: #CCCCCC;
+    --btn-solid-fg: #111111;
+  }
 
-  <!-- Bootstrap CSS File -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--ground); color: var(--text); font-family: var(--ff);
+    font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  ::selection { background: var(--text); color: var(--ground-white); }
+  a { color: var(--text); text-decoration: none; transition: color 0.15s; }
+  a:hover { color: var(--teal); }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 1.75rem; }
 
-  <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/animate/animate.min.css" rel="stylesheet">
-  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">
-  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--ground-white); border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--ff); font-weight: 700; font-size: 1.1rem;
+    color: var(--text); display: flex; align-items: center; gap: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
+  }
+  .logo-mark img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem; list-style: none;
+    justify-self: center;
+  }
+  .nav-links a { font-size: 0.88rem; font-weight: 500; color: var(--text-secondary); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--text); color: var(--ground-white) !important; padding: 0.5rem 1.25rem;
+    border-radius: 6px; font-weight: 600; font-size: 0.88rem; transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.85; color: var(--ground-white) !important; }
+  .nav-right {
+    display: flex; align-items: center; gap: 0.75rem; justify-self: end;
+  }
 
-  <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
+  /* Slide toggle */
+  .theme-slide {
+    width: 52px; height: 28px; border-radius: 14px;
+    background: var(--border); border: none; cursor: pointer;
+    position: relative; transition: background 0.25s; flex-shrink: 0;
+    padding: 0;
+  }
+  .theme-slide::after {
+    content: '';
+    position: absolute; top: 3px; left: 3px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--ground-white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    transition: transform 0.25s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .theme-slide .slide-icon {
+    position: absolute; top: 5px; width: 18px; height: 18px;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  .theme-slide .icon-sun { left: 5px; color: var(--text); opacity: 0.7; }
+  .theme-slide .icon-moon { right: 5px; color: var(--text); opacity: 0.35; }
+  :root[data-theme="dark"] .theme-slide { background: #333; }
+  :root[data-theme="dark"] .theme-slide::after { transform: translateX(24px); }
+  :root[data-theme="dark"] .theme-slide .icon-sun { opacity: 0.4; }
+  :root[data-theme="dark"] .theme-slide .icon-moon { opacity: 1; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-slide { background: #333; }
+    :root:not([data-theme="light"]) .theme-slide::after { transform: translateX(24px); }
+    :root:not([data-theme="light"]) .theme-slide .icon-sun { opacity: 0.4; }
+    :root:not([data-theme="light"]) .theme-slide .icon-moon { opacity: 1; }
+  }
 
-  <!-- =======================================================
-    Theme Name: Reveal
-    Theme URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
-    Author: BootstrapMade.com
-    License: https://bootstrapmade.com/license/
-  ======================================================= -->
-</head>
+  .mob-toggle {
+    display: none; background: none; border: none; cursor: pointer; width: 28px; height: 24px; position: relative;
+  }
+  .mob-toggle span {
+    display: block; width: 20px; height: 2px; background: var(--text);
+    position: absolute; left: 4px; border-radius: 1px; transition: 0.2s;
+  }
+  .mob-toggle span:nth-child(1) { top: 4px; }
+  .mob-toggle span:nth-child(2) { top: 11px; }
+  .mob-toggle span:nth-child(3) { top: 18px; }
 
-<body id="body">
+  /* ── Hero ── */
+  .hero { padding: 9rem 0 5rem; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .hero h1 {
+    font-size: clamp(2.5rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.08;
+    letter-spacing: -0.03em; text-wrap: balance;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--text-secondary); margin-top: 1.25rem;
+    max-width: 480px; line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap; }
+  .btn-solid {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    background: var(--btn-solid-bg); color: var(--btn-solid-fg); padding: 0.8rem 1.75rem;
+    border-radius: 6px; font-family: var(--ff); font-weight: 600; font-size: 0.95rem;
+    border: none; cursor: pointer; transition: background 0.15s;
+  }
+  .btn-solid:hover { background: var(--btn-solid-bg-hover); color: var(--btn-solid-fg); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    background: none; color: var(--text); padding: 0.8rem 1.75rem;
+    border-radius: 6px; font-family: var(--ff); font-weight: 600; font-size: 0.95rem;
+    border: 1px solid var(--border); cursor: pointer; transition: border-color 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--text-secondary); }
 
-  <!--==========================
-    Top Bar
-  ============================-->
-  <section id="topbar" class="d-none d-lg-block">
-    <div class="container clearfix">
-      <div class="contact-info float-left">
-        <i class="fa fa-envelope-o"></i> <a href="mailto:admin@nexusaisolutionsllc.com">admin@nexusaisolutionsllc.com</a>
-        <i class="fa fa-phone"></i> <a href="tel:+1234567890">+1(251) 347-4780</a>
+  /* Hero graphic — abstract node diagram */
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-visual svg { width: 100%; max-width: 420px; height: auto; }
+
+  /* ── Logos ── */
+  .logos-bar {
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0;
+  }
+  .logos-label {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 1.75rem;
+  }
+  .logos-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .partner-logo {
+    color: var(--text-secondary); opacity: 0.65; transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+  .partner-logo:hover { opacity: 1; }
+
+  /* ── Mission ── */
+  .mission { padding: 6rem 0; }
+  .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .mission-text h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700;
+    line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance;
+  }
+  .mission-text h2 em { font-style: italic; color: var(--teal); }
+  .mission-text > p {
+    color: var(--text-secondary); margin-top: 1.25rem; line-height: 1.75; font-size: 0.95rem;
+  }
+  .mission-values {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.5rem;
+  }
+  .mv-card {
+    padding: 1.5rem; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--ground-white);
+  }
+  .mv-card h4 {
+    font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .mv-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+  .mv-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  /* ── Products ── */
+  .products { padding: 6rem 0; }
+  .products-intro { max-width: 560px; margin-bottom: 4rem; }
+  .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text); margin-bottom: 0.75rem;
+  }
+  .sec-heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700;
+    line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance;
+  }
+
+  .product-block {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: start; padding: 4rem 0; border-top: 1px solid var(--border);
+  }
+  .product-block:nth-child(even) .product-text { order: 2; }
+  .product-block:nth-child(even) .product-visual { order: 1; }
+
+  .product-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.65rem; border-radius: 4px; margin-bottom: 1rem;
+  }
+  .tag-healthcare, .tag-media, .tag-access { background: var(--border); color: var(--text-secondary); }
+
+  .product-text h3 {
+    font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em;
+    line-height: 1.15; margin-bottom: 1rem;
+  }
+  .product-text > p {
+    color: var(--text-secondary); line-height: 1.75; margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .feature-list {
+    list-style: none; display: flex; flex-direction: column; gap: 0.65rem;
+    margin-bottom: 1.5rem;
+  }
+  .feature-list li {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-size: 0.9rem; color: var(--text); line-height: 1.5;
+  }
+  .feat-icon {
+    flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feat-icon.green, .feat-icon.red, .feat-icon.amber { background: var(--text); color: var(--ground-white); }
+
+  .product-meta {
+    display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+    padding-top: 1.25rem; border-top: 1px solid var(--border);
+  }
+  .meta-chip {
+    font-size: 0.78rem; font-weight: 600; padding: 0.35rem 0.75rem;
+    border-radius: 4px; border: 1px solid var(--border); color: var(--text-secondary);
+  }
+  .meta-status {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);
+  }
+  .meta-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+  }
+
+  /* Product visuals */
+  .product-visual {
+    background: var(--ground-white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2.5rem; display: flex;
+    align-items: center; justify-content: center; min-height: 340px;
+  }
+  .product-visual svg { width: 100%; max-width: 360px; height: auto; }
+
+  /* ── Numbers strip ── */
+  .numbers {
+    background: var(--ground-dark); color: var(--text-on-dark);
+    padding: 4rem 0;
+  }
+  .numbers-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+  }
+  .num-item { text-align: center; }
+  .num-value {
+    font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700;
+    letter-spacing: -0.02em; color: var(--text-on-dark); line-height: 1.2;
+  }
+  .num-label { font-size: 0.85rem; color: var(--text-dim-on-dark); margin-top: 0.3rem; }
+
+  /* ── Contact ── */
+  .contact { padding: 6rem 0; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 4rem; }
+  .contact-left h2 {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 700;
+    line-height: 1.12; letter-spacing: -0.02em;
+  }
+  .contact-left h2 em { font-style: italic; color: var(--teal); }
+  .contact-left > p {
+    color: var(--text-secondary); margin-top: 1rem; max-width: 400px; line-height: 1.7;
+  }
+  .contact-details {
+    display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem;
+  }
+  .cd-item { display: flex; align-items: center; gap: 0.75rem; }
+  .cd-icon {
+    width: 36px; height: 36px; border-radius: 8px; background: var(--border);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    color: var(--text-secondary);
+  }
+  .cd-item span { font-size: 0.92rem; }
+  .cd-item a { color: var(--text); }
+  .cd-item a:hover { color: var(--teal); }
+
+  .form-card {
+    background: var(--ground-white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2.25rem;
+  }
+  .form-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1.5rem; }
+  .form-stack { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .fld { display: flex; flex-direction: column; gap: 0.3rem; }
+  .fld label { font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); }
+  .fld input, .fld textarea, .fld select {
+    background: var(--ground); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.7rem 0.9rem; font-family: var(--ff); font-size: 0.92rem;
+    color: var(--text); outline: none; transition: border-color 0.15s;
+  }
+  .fld input::placeholder, .fld textarea::placeholder { color: var(--text-muted); }
+  .fld input:focus, .fld textarea:focus, .fld select:focus { border-color: var(--teal); }
+  .fld textarea { resize: vertical; min-height: 100px; }
+  .fld select {
+    cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8A8A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.25rem;
+  }
+  .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.25rem; }
+  .form-note { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── FAQ ── */
+  .faq { padding: 6rem 0; border-top: 1px solid var(--border); }
+  .faq-intro { max-width: 560px; margin-bottom: 3rem; }
+  .faq-list { max-width: 720px; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-btn {
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+    background: none; border: none; cursor: pointer; padding: 1.25rem 0;
+    font-family: var(--ff); font-size: 1rem; font-weight: 600; color: var(--text);
+    text-align: left; gap: 1rem; line-height: 1.4;
+  }
+  .faq-btn:hover { color: var(--teal); }
+  .faq-chevron {
+    flex-shrink: 0; width: 20px; height: 20px; transition: transform 0.25s;
+    color: var(--text-muted);
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+  }
+  .faq-answer-inner {
+    padding: 0 0 1.25rem; color: var(--text-secondary); font-size: 0.92rem;
+    line-height: 1.7; max-width: 640px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--ground-dark); color: var(--text-on-dark); padding: 4rem 0 2rem;
+  }
+  .foot-grid {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem;
+    padding-bottom: 3rem; border-bottom: 1px solid var(--border-dark);
+  }
+  .foot-brand .nav-logo { color: var(--text-on-dark); margin-bottom: 1rem; }
+  .foot-brand p {
+    font-size: 0.85rem; color: var(--text-dim-on-dark); line-height: 1.65;
+    max-width: 260px;
+  }
+  .foot-col h4 {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-dim-on-dark); margin-bottom: 1rem;
+  }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .foot-col a { font-size: 0.88rem; color: var(--text-dim-on-dark); transition: color 0.15s; }
+  .foot-col a:hover { color: var(--text-on-dark); }
+  .foot-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 1.5rem; flex-wrap: wrap; gap: 0.75rem;
+  }
+  .foot-copy { font-size: 0.78rem; color: var(--text-dim-on-dark); }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .product-block { grid-template-columns: 1fr; gap: 2rem; }
+    .product-block:nth-child(even) .product-text { order: 1; }
+    .product-block:nth-child(even) .product-visual { order: 2; }
+    .numbers-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .logos-row { gap: 2rem; }
+    .mission-grid { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .mob-toggle { display: block; }
+    .nav-links { display: none; }
+    .nav-right { gap: 0.5rem; }
+    .nav-links.open {
+      display: flex; flex-direction: column; position: absolute;
+      top: 64px; left: 0; right: 0; background: var(--ground-white);
+      border-bottom: 1px solid var(--border); padding: 1.25rem 1.75rem; gap: 0.75rem;
+      grid-column: 1 / -1;
+    }
+    .hero { padding: 7rem 0 3.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .numbers-grid { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .foot-bottom { flex-direction: column; text-align: center; }
+    .container { padding: 0 1.25rem; }
+    .form-foot { flex-direction: column; align-items: stretch; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+
+<!-- Nav -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo" style="text-decoration:none">
+      <span class="logo-mark"><img src="data:image/png;base64,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" alt="Nexus AI"></span> Nexus AI Solutions
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#solutions">Solutions</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-slide" aria-label="Toggle theme" onclick="toggleTheme()">
+        <svg class="slide-icon icon-sun" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="3.5" stroke="currentColor" stroke-width="1.3"/><path d="M9 1.5v2M9 14.5v2M1.5 9h2M14.5 9h2M3.87 3.87l1.41 1.41M12.72 12.72l1.41 1.41M3.87 14.13l1.41-1.41M12.72 5.28l1.41-1.41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <svg class="slide-icon icon-moon" viewBox="0 0 18 18" fill="none"><path d="M15.38 10.06A6.3 6.3 0 017.94 2.62 6.3 6.3 0 1015.38 10.06z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="mob-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <h1>Empowering enterprises with <em>cutting-edge AI</em></h1>
+        <p class="hero-sub">At Nexus AI Solutions, we harness the power of artificial intelligence to drive innovation, efficiency, and accessibility across healthcare, entertainment, and assistive technology. We create AI-driven solutions that automate complex tasks, enhance productivity, and make technology more accessible — because the industries that shape lives deserve tools built for the stakes involved.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-solid">Request a Demo <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#solutions" class="btn-ghost">See Our Solutions</a>
+        </div>
       </div>
-      <div class="social-links float-right">
-        <a href="https://x.com/nexusaisols"><i class="fa fa-twitter"></i></a>
-        <a href="https://www.linkedin.com/company/nexus-ai-solutions-llc" class="linkedin"><i class="fa fa-linkedin"></i></a>
+      <div class="hero-visual">
+        <!-- Abstract connected-node diagram representing "nexus" -->
+        <svg viewBox="0 0 400 360" fill="none">
+          <!-- Connection lines -->
+          <line x1="200" y1="80" x2="100" y2="200" stroke="var(--text)" stroke-width="1" opacity="0.15"/>
+          <line x1="200" y1="80" x2="300" y2="200" stroke="var(--text)" stroke-width="1" opacity="0.15"/>
+          <line x1="100" y1="200" x2="300" y2="200" stroke="var(--text)" stroke-width="1" opacity="0.15"/>
+          <line x1="100" y1="200" x2="80" y2="310" stroke="var(--text)" stroke-width="1" opacity="0.08"/>
+          <line x1="300" y1="200" x2="320" y2="310" stroke="var(--text)" stroke-width="1" opacity="0.08"/>
+          <line x1="200" y1="80" x2="200" y2="30" stroke="var(--text)" stroke-width="1" opacity="0.08"/>
+          <!-- Central nexus node -->
+          <circle cx="200" cy="150" r="36" fill="var(--text)" opacity="0.05"/>
+          <circle cx="200" cy="150" r="18" fill="var(--text)" opacity="0.12"/>
+          <circle cx="200" cy="150" r="6" fill="var(--text)"/>
+          <!-- Healthcare node -->
+          <circle cx="200" cy="80" r="22" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5" opacity="0.9"/>
+          <text x="200" y="84" text-anchor="middle" font-family="var(--ff)" font-size="10" font-weight="700" fill="var(--text)">HC</text>
+          <text x="200" y="50" text-anchor="middle" font-family="var(--ff)" font-size="11" font-weight="600" fill="var(--text)">Healthcare</text>
+          <!-- Entertainment node -->
+          <circle cx="100" cy="200" r="22" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5" opacity="0.9"/>
+          <text x="100" y="204" text-anchor="middle" font-family="var(--ff)" font-size="10" font-weight="700" fill="var(--text)">ME</text>
+          <text x="56" y="234" text-anchor="middle" font-family="var(--ff)" font-size="11" font-weight="600" fill="var(--text)">Media</text>
+          <!-- Accessibility node -->
+          <circle cx="300" cy="200" r="22" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5" opacity="0.9"/>
+          <text x="300" y="204" text-anchor="middle" font-family="var(--ff)" font-size="10" font-weight="700" fill="var(--text)">AC</text>
+          <text x="344" y="234" text-anchor="middle" font-family="var(--ff)" font-size="11" font-weight="600" fill="var(--text)">Access</text>
+          <!-- Sub-nodes -->
+          <circle cx="80" cy="310" r="3" fill="var(--text)" opacity="0.25"/>
+          <circle cx="320" cy="310" r="3" fill="var(--text)" opacity="0.25"/>
+          <circle cx="200" cy="30" r="3" fill="var(--text)" opacity="0.25"/>
+          <text x="80" y="330" text-anchor="middle" font-family="var(--ff)" font-size="9" fill="var(--text-secondary)">A24 · Gaumont · Neon</text>
+          <text x="320" y="330" text-anchor="middle" font-family="var(--ff)" font-size="9" fill="var(--text-secondary)">Voice · Eye-tracking</text>
+          <text x="200" y="20" text-anchor="middle" font-family="var(--ff)" font-size="9" fill="var(--text-secondary)">UCB Pharma</text>
+        </svg>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!--==========================
-    Header
-  ============================-->
-  <header id="header">
-    <div class="container">
+<!-- Partner Logos -->
+<section class="logos-bar">
+  <div class="container">
+    <div class="logos-label">Trusted by</div>
+    <div class="logos-row">
+      <!-- A24 -->
+      <svg class="partner-logo" width="60" height="28" viewBox="0 0 60 28" fill="none">
+        <text x="0" y="22" font-family="var(--ff)" font-size="22" font-weight="700" letter-spacing="-1" fill="currentColor">A24</text>
+      </svg>
+      <!-- Gaumont -->
+      <svg class="partner-logo" width="110" height="28" viewBox="0 0 110 28" fill="none">
+        <text x="0" y="20" font-family="var(--ff)" font-size="16" font-weight="700" letter-spacing="2" text-transform="uppercase" fill="currentColor">GAUMONT</text>
+      </svg>
+      <!-- Neon -->
+      <svg class="partner-logo" width="72" height="28" viewBox="0 0 72 28" fill="none">
+        <text x="0" y="21" font-family="var(--ff)" font-size="20" font-weight="700" letter-spacing="3" fill="currentColor">NEON</text>
+      </svg>
+      <!-- Big Beach -->
+      <svg class="partner-logo" width="105" height="28" viewBox="0 0 105 28" fill="none">
+        <text x="0" y="19" font-family="var(--ff)" font-size="14" font-weight="600" letter-spacing="1" fill="currentColor">BIG BEACH</text>
+      </svg>
+      <!-- UCB -->
+      <svg class="partner-logo" width="56" height="32" viewBox="0 0 56 32" fill="none">
+        <text x="0" y="22" font-family="var(--ff)" font-size="22" font-weight="700" letter-spacing="1" fill="currentColor">UCB</text>
+        <text x="0" y="31" font-family="var(--ff)" font-size="7" font-weight="500" letter-spacing="0.5" fill="currentColor" opacity="0.6">PHARMA</text>
+      </svg>
+    </div>
+  </div>
+</section>
 
-      <div id="logo" class="pull-left">
-        <h1><a href="#body" class="text-dark">Nexus AI</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="#body"><img src="img/logo.png" alt="" title="" /></a>-->
+<!-- Mission -->
+<section class="mission" id="about">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-text">
+        <div class="eyebrow">Our Mission</div>
+        <h2>Building AI that works where it <em>matters most</em></h2>
+        <p>We don't build general-purpose chatbots or incremental productivity tools. We build domain-specific AI systems for industries where the margin for error is thin and the potential impact is enormous — pharmaceutical research, global entertainment distribution, and human accessibility.</p>
+        <p>Every product is grounded in deep collaboration with the enterprises and communities that use it. Our AI doesn't just perform well in benchmarks — it performs well in the real-world conditions where it's deployed.</p>
       </div>
+      <div class="mission-values">
+        <div class="mv-card">
+          <h4>Domain Expertise</h4>
+          <p>We embed ourselves in the industries we serve. Our AI models are trained on domain-specific data and validated by the practitioners who rely on them daily.</p>
+        </div>
+        <div class="mv-card">
+          <h4>Precision First</h4>
+          <p>In healthcare and entertainment, "good enough" isn't good enough. We engineer for accuracy, reliability, and production-grade quality from day one.</p>
+        </div>
+        <div class="mv-card">
+          <h4>Real-World Impact</h4>
+          <p>Our measure of success isn't a demo — it's deployment. Every product is designed to create measurable value in live enterprise environments and real people's lives.</p>
+        </div>
+        <div class="mv-card">
+          <h4>Accessibility</h4>
+          <p>Technology should work for everyone. We're committed to making cutting-edge AI accessible to individuals and organizations regardless of their physical abilities or technical resources.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li class="menu-active"><a href="#body">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#team">Team</a></li>
+<!-- Products -->
+<section class="products" id="solutions">
+  <div class="container">
+    <div class="products-intro">
+      <div class="eyebrow">Solutions</div>
+      <h2 class="sec-heading">Three products. Three industries. One principle: AI built for real-world stakes.</h2>
+      <p style="color:var(--text-secondary);margin-top:1rem;line-height:1.7;font-size:0.95rem;">Each of our products targets a specific high-impact industry where generic AI tools fall short. We go deep — building custom models, integrating with existing workflows, and validating with domain experts — so the output is production-ready from day one.</p>
+    </div>
+
+    <!-- Healthcare R&D Kit -->
+    <div class="product-block">
+      <div class="product-text">
+        <span class="product-tag tag-healthcare">Healthcare</span>
+        <h3>Healthcare R&D Kit</h3>
+        <p>An AI orchestration framework that deploys autonomous agents across the entire drug discovery pipeline. Traditional pharmaceutical R&D is one of the most resource-intensive processes in any industry — it typically takes 10 to 15 years and costs upwards of $2 billion to bring a single drug to market. Much of that time is spent on manual literature review, physical compound screening, and navigating fragmented datasets spread across genomic databases, chemical patent libraries, and electronic health records.</p>
+        <p>The Healthcare R&D Kit changes this equation. Our system ingests these massive, fragmented datasets simultaneously, cross-referencing findings across sources that researchers would normally spend months connecting manually. It uses multi-agent AI orchestration to identify novel drug targets, generate optimized molecular structures, predict compound viability, and even draft regulatory-ready documentation — all while maintaining the scientific rigor that pharmaceutical development demands.</p>
+        <ul class="feature-list">
+          <li>
+            <span class="feat-icon green"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Simultaneously ingests and cross-references genomic databases, chemical patent libraries, clinical trial data, and electronic health records
+          </li>
+          <li>
+            <span class="feat-icon green"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Generates optimized molecular structures and identifies novel drug targets using multi-agent AI orchestration
+          </li>
+          <li>
+            <span class="feat-icon green"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Predicts compound viability and drug-target interactions before physical screening, reducing costly lab iterations
+          </li>
+          <li>
+            <span class="feat-icon green"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Automates drafting of FDA regulatory submissions, clinical documentation, and compliance reports
+          </li>
+          <li>
+            <span class="feat-icon green"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Targeting a 50–70% reduction in the traditional 10–15 year drug development timeline
+          </li>
+        </ul>
+        <div class="product-meta">
+          <span class="meta-chip">UCB Pharma</span>
+          <span class="meta-status"><span class="meta-dot"></span> Active pilot</span>
+        </div>
+      </div>
+      <div class="product-visual">
+        <!-- Pipeline diagram -->
+        <svg viewBox="0 0 340 280" fill="none">
+          <!-- Pipeline stages -->
+          <rect x="20" y="20" width="90" height="56" rx="8" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="65" y="43" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">DATA INGESTION</text>
+          <text x="65" y="57" text-anchor="middle" font-family="var(--ff)" font-size="7.5" fill="var(--text-secondary)">Genomic · Patent · EHR</text>
+
+          <path d="M110 48h30" stroke="var(--text)" stroke-width="1" opacity="0.3"/>
+          <path d="M136 44l6 4-6 4" stroke="var(--text)" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+          <rect x="145" y="20" width="90" height="56" rx="8" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="190" y="43" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">AI ANALYSIS</text>
+          <text x="190" y="57" text-anchor="middle" font-family="var(--ff)" font-size="7.5" fill="var(--text-secondary)">Autonomous Agents</text>
+
+          <path d="M235 48h30" stroke="var(--text)" stroke-width="1" opacity="0.3"/>
+          <path d="M261 44l6 4-6 4" stroke="var(--text)" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+          <rect x="230" y="20" width="90" height="56" rx="8" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="275" y="43" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">OUTPUT</text>
+          <text x="275" y="57" text-anchor="middle" font-family="var(--ff)" font-size="7.5" fill="var(--text-secondary)">Molecules · Docs</text>
+
+          <!-- Output examples -->
+          <rect x="20" y="110" width="140" height="48" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="42" cy="134" r="10" fill="var(--text)" opacity="0.12"/>
+          <text x="40" y="137" text-anchor="middle" font-family="var(--ff)" font-size="10" fill="var(--text)">⬡</text>
+          <text x="60" y="130" font-family="var(--ff)" font-size="9" font-weight="600" fill="var(--text)">Molecular Structure</text>
+          <text x="60" y="142" font-family="var(--ff)" font-size="7.5" fill="var(--text-secondary)">Optimized compound</text>
+
+          <rect x="180" y="110" width="140" height="48" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="202" cy="134" r="10" fill="var(--text)" opacity="0.12"/>
+          <text x="200" y="138" text-anchor="middle" font-family="var(--ff)" font-size="10" fill="var(--text)">◎</text>
+          <text x="220" y="130" font-family="var(--ff)" font-size="9" font-weight="600" fill="var(--text)">Drug Target</text>
+          <text x="220" y="142" font-family="var(--ff)" font-size="7.5" fill="var(--text-secondary)">Novel validated target</text>
+
+          <rect x="20" y="172" width="140" height="48" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="42" cy="196" r="10" fill="var(--text)" opacity="0.12"/>
+          <text x="40" y="200" text-anchor="middle" font-family="var(--ff)" font-size="10" fill="var(--text)">☰</text>
+          <text x="60" y="192" font-family="var(--ff)" font-size="9" font-weight="600" fill="var(--text)">Regulatory Draft</text>
+          <text x="60" y="204" font-family="var(--ff)" font-size="7.5" fill="var(--text-secondary)">FDA-ready documents</text>
+
+          <!-- Timeline comparison -->
+          <rect x="20" y="240" width="300" height="28" rx="4" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <rect x="21" y="241" width="90" height="26" rx="3" fill="var(--text)" opacity="0.12"/>
+          <text x="66" y="258" text-anchor="middle" font-family="var(--ff)" font-size="8" font-weight="700" fill="var(--text)">3–5 YEARS</text>
+          <text x="200" y="258" text-anchor="middle" font-family="var(--ff)" font-size="8" fill="var(--text-secondary)">vs. traditional 10–15 years</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Nexus Dubber -->
+    <div class="product-block">
+      <div class="product-text">
+        <span class="product-tag tag-media">Media &amp; Entertainment</span>
+        <h3>Nexus Dubber</h3>
+        <p>AI-powered dubbing that doesn't flatten a performance. When a film crosses borders, traditional dubbing replaces the actor's voice with a stranger's — and in the process, it loses the subtlety, emotion, and personality that made the performance work. The result is a version of the film that technically speaks the right language but emotionally speaks a different one. Audiences notice, and engagement drops.</p>
+        <p>Nexus Dubber takes a fundamentally different approach. Our AI preserves the original actor's voice signature — their unique timbre, cadence, breathing patterns, and emotional delivery — while adapting the dialogue for a new language. The system handles lip-sync alignment and natural speech rhythm automatically, so the dubbed version doesn't just sound translated, it sounds performed. Studios get global distribution at a fraction of traditional dubbing costs and timelines, without sacrificing the creative integrity that defines their work.</p>
+        <ul class="feature-list">
+          <li>
+            <span class="feat-icon red"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Preserves the actor's original voice signature, timbre, breathing patterns, and emotional delivery across every language
+          </li>
+          <li>
+            <span class="feat-icon red"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Automatic lip-sync alignment and natural speech rhythm adaptation — the dubbed version looks and feels native
+          </li>
+          <li>
+            <span class="feat-icon red"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Scales from a single source to multi-language distribution, enabling simultaneous global releases
+          </li>
+          <li>
+            <span class="feat-icon red"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Dramatically reduces dubbing costs and turnaround times compared to traditional voice-actor re-recording
+          </li>
+          <li>
+            <span class="feat-icon red"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Production-grade output trusted by major independent film studios for theatrical and streaming releases
+          </li>
+        </ul>
+        <div class="product-meta">
+          <span class="meta-chip">A24</span>
+          <span class="meta-chip">Big Beach</span>
+          <span class="meta-chip">Gaumont</span>
+          <span class="meta-chip">Neon</span>
+          <span class="meta-status"><span class="meta-dot"></span> $250k+ contracts</span>
+        </div>
+      </div>
+      <div class="product-visual">
+        <!-- Dubbing diagram: voice in → AI → multi-language out -->
+        <svg viewBox="0 0 340 260" fill="none">
+          <!-- Input: original voice -->
+          <rect x="20" y="30" width="130" height="60" rx="8" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="85" y="52" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">ORIGINAL VOICE</text>
+          <!-- Waveform -->
+          <g transform="translate(40,60)">
+            <line x1="0" y1="10" x2="0" y2="-4" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <line x1="8" y1="10" x2="8" y2="-8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <line x1="16" y1="10" x2="16" y2="-2" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+            <line x1="24" y1="10" x2="24" y2="-10" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="32" y1="10" x2="32" y2="-6" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <line x1="40" y1="10" x2="40" y2="-12" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+            <line x1="48" y1="10" x2="48" y2="-4" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+            <line x1="56" y1="10" x2="56" y2="-8" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <line x1="64" y1="10" x2="64" y2="-3" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+            <line x1="72" y1="10" x2="72" y2="-6" stroke="var(--text)" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+          </g>
+
+          <!-- Arrow down to AI -->
+          <path d="M85 95v25" stroke="var(--text)" stroke-width="1" opacity="0.3"/>
+          <path d="M81 116l4 6 4-6" stroke="var(--text)" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+          <!-- AI processing box -->
+          <rect x="40" y="125" width="90" height="40" rx="6" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="85" y="149" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">Nexus Dubber AI</text>
+
+          <!-- Arrows to outputs -->
+          <path d="M130 145h40" stroke="var(--text)" stroke-width="1" opacity="0.2"/>
+          <path d="M170 145l0-30" stroke="var(--text)" stroke-width="1" opacity="0.2"/>
+          <path d="M170 145l0 30" stroke="var(--text)" stroke-width="1" opacity="0.2"/>
+          <path d="M170 145l60 0" stroke="var(--text)" stroke-width="1" opacity="0.2"/>
+
+          <!-- Output languages -->
+          <rect x="175" y="100" width="145" height="34" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="192" cy="117" r="8" fill="var(--text)" opacity="0.1"/>
+          <text x="192" y="121" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">ES</text>
+          <text x="212" y="114" font-family="var(--ff)" font-size="8.5" font-weight="600" fill="var(--text)">Spanish</text>
+          <text x="212" y="124" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Same voice · Same emotion</text>
+
+          <rect x="175" y="143" width="145" height="34" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="192" cy="160" r="8" fill="var(--text)" opacity="0.1"/>
+          <text x="192" y="164" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">FR</text>
+          <text x="212" y="157" font-family="var(--ff)" font-size="8.5" font-weight="600" fill="var(--text)">French</text>
+          <text x="212" y="167" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Same voice · Same emotion</text>
+
+          <rect x="175" y="186" width="145" height="34" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <circle cx="192" cy="203" r="8" fill="var(--text)" opacity="0.1"/>
+          <text x="192" y="207" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">JA</text>
+          <text x="212" y="200" font-family="var(--ff)" font-size="8.5" font-weight="600" fill="var(--text)">Japanese</text>
+          <text x="212" y="210" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Same voice · Same emotion</text>
+
+          <!-- Bottom label -->
+          <text x="170" y="248" text-anchor="middle" font-family="var(--ff)" font-size="8" fill="var(--text-secondary)">One performance → Every language</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Nexus Access -->
+    <div class="product-block">
+      <div class="product-text">
+        <span class="product-tag tag-access">Accessibility</span>
+        <h3>Nexus Access</h3>
+        <p>Over one billion people worldwide live with some form of disability, yet most accessibility tools are still workarounds rather than solutions. Screen readers describe what's on screen but can't act on it. Switch controls let you navigate an interface, but laboriously, one element at a time. These tools accommodate the computer's limitations — they don't transcend them.</p>
+        <p>Nexus Access takes a fundamentally different approach. It uses large language models to actually understand full computer environments — the operating system, running applications, open documents, browser tabs, and everything in between. Users interact through natural voice commands ("open my email and reply to the latest message from Sarah") and integrated eye-tracking for precise cursor control and selection. The AI interprets intent, not just words, and executes complex multi-step actions autonomously. The computer becomes an extension of the user's intent, not an obstacle to it.</p>
+        <ul class="feature-list">
+          <li>
+            <span class="feat-icon amber"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            LLM-powered deep understanding of any computer environment, application, and on-screen context
+          </li>
+          <li>
+            <span class="feat-icon amber"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Natural voice command execution — speak in full sentences and natural language, not rigid command syntax or keyword triggers
+          </li>
+          <li>
+            <span class="feat-icon amber"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Integrated eye-tracking for precise cursor control, element selection, and gaze-based scrolling
+          </li>
+          <li>
+            <span class="feat-icon amber"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Executes complex multi-step actions autonomously — from composing emails to managing files to browsing the web
+          </li>
+          <li>
+            <span class="feat-icon amber"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Works across operating systems and applications — not limited to specific software, browsers, or platforms
+          </li>
+        </ul>
+        <div class="product-meta">
+          <span class="meta-status"><span class="meta-dot"></span> Launching soon</span>
+        </div>
+      </div>
+      <div class="product-visual">
+        <!-- Access diagram: user → voice/gaze → AI → action -->
+        <svg viewBox="0 0 340 260" fill="none">
+          <!-- User -->
+          <circle cx="60" cy="60" r="20" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <circle cx="60" cy="54" r="6" fill="none" stroke="var(--text)" stroke-width="1.2"/>
+          <path d="M50 68c0-5.5 4.5-8 10-8s10 2.5 10 8" stroke="var(--text)" stroke-width="1.2" stroke-linecap="round"/>
+          <text x="60" y="96" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">User</text>
+
+          <!-- Input methods -->
+          <path d="M85 50h35" stroke="var(--text)" stroke-width="1" opacity="0.2"/>
+          <path d="M85 70h35" stroke="var(--text)" stroke-width="1" opacity="0.2"/>
+
+          <rect x="125" y="30" width="90" height="28" rx="6" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="170" y="48" text-anchor="middle" font-family="var(--ff)" font-size="8.5" font-weight="600" fill="var(--text)">Voice Command</text>
+
+          <rect x="125" y="65" width="90" height="28" rx="6" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="170" y="83" text-anchor="middle" font-family="var(--ff)" font-size="8.5" font-weight="600" fill="var(--text)">Eye Tracking</text>
+
+          <!-- Arrow to AI -->
+          <path d="M170 98v20" stroke="var(--text)" stroke-width="1" opacity="0.3"/>
+          <path d="M166 114l4 6 4-6" stroke="var(--text)" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+          <!-- AI box -->
+          <rect x="120" y="125" width="100" height="40" rx="8" fill="var(--ground-white)" stroke="var(--text)" stroke-width="1.5"/>
+          <text x="170" y="143" text-anchor="middle" font-family="var(--ff)" font-size="9" font-weight="700" fill="var(--text)">LLM Engine</text>
+          <text x="170" y="156" text-anchor="middle" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Understands context</text>
+
+          <!-- Arrow to actions -->
+          <path d="M170 170v18" stroke="var(--text)" stroke-width="1" opacity="0.3"/>
+          <path d="M166 184l4 6 4-6" stroke="var(--text)" stroke-width="1.5" fill="none" opacity="0.5"/>
+
+          <!-- Actions row -->
+          <rect x="20" y="195" width="80" height="40" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <text x="60" y="212" text-anchor="middle" font-family="var(--ff)" font-size="8" font-weight="600" fill="var(--text)">Open Files</text>
+          <text x="60" y="224" text-anchor="middle" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Navigate freely</text>
+
+          <rect x="110" y="195" width="80" height="40" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <text x="150" y="212" text-anchor="middle" font-family="var(--ff)" font-size="8" font-weight="600" fill="var(--text)">Write Text</text>
+          <text x="150" y="224" text-anchor="middle" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Compose anything</text>
+
+          <rect x="200" y="195" width="80" height="40" rx="6" fill="var(--ground-white)" stroke="var(--border)" stroke-width="1"/>
+          <text x="240" y="212" text-anchor="middle" font-family="var(--ff)" font-size="8" font-weight="600" fill="var(--text)">Browse Web</text>
+          <text x="240" y="224" text-anchor="middle" font-family="var(--ff)" font-size="7" fill="var(--text-secondary)">Full control</text>
+
+          <text x="170" y="255" text-anchor="middle" font-family="var(--ff)" font-size="8" fill="var(--text-secondary)">Full device control through natural interaction</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Numbers -->
+<section class="numbers" id="numbers">
+  <div class="container">
+    <div class="numbers-grid">
+      <div class="num-item">
+        <div class="num-value">3</div>
+        <div class="num-label">AI products in market</div>
+      </div>
+      <div class="num-item">
+        <div class="num-value">50–70%</div>
+        <div class="num-label">Faster drug development</div>
+      </div>
+      <div class="num-item">
+        <div class="num-value">$250k+</div>
+        <div class="num-label">Enterprise contracts</div>
+      </div>
+      <div class="num-item">
+        <div class="num-value">6+</div>
+        <div class="num-label">Studio &amp; pharma partners</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="eyebrow">Contact</div>
+        <h2>Let's talk about <em>your challenge</em></h2>
+        <p>Whether you're a pharmaceutical company looking to accelerate drug discovery, a film studio expanding into international markets, or an organization committed to making technology accessible to everyone — we'd love to hear from you. We build AI around your specific problem, not the other way around, and every engagement starts with understanding your goals.</p>
+        <div class="contact-details">
+          <div class="cd-item">
+            <div class="cd-icon">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span><a href="mailto:admin@nexusaisolutionsllc.com">admin@nexusaisolutionsllc.com</a></span>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2.5 3.5L8 8l-1.5 1.5a11 11 0 004 4L12 12l4.5 5.5a1 1 0 01-.2 1.3l-1.5 1a1 1 0 01-1.1 0C9.5 17 3 10.5 .2 6.3a1 1 0 010-1.1l1-1.5a1 1 0 011.3-.2z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span><a href="tel:+12513474780">(251) 347-4780</a></span>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M16 8c0 5-6 10-6 10S4 13 4 8a6 6 0 1112 0z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <span>United States</span>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 4h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <span><a href="https://www.linkedin.com/company/106507613/" target="_blank" rel="noopener">LinkedIn</a></span>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M18.3 2.1l-8.2 16.4a.5.5 0 01-.9-.1L7 12.8a.5.5 0 00-.3-.3L1.1 10.3a.5.5 0 01-.1-.9L17.4 1.2a.5.5 0 01.7.1l.2.2a.5.5 0 010 .6z" stroke="currentColor" stroke-width="1.3"/></svg>
+            </div>
+            <span><a href="https://x.com/nexusaisols" target="_blank" rel="noopener">X (Twitter)</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Send us a message</h3>
+        <form class="form-stack" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="fld">
+              <label for="name">Full name</label>
+              <input type="text" id="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="fld">
+              <label for="email">Work email</label>
+              <input type="email" id="email" placeholder="jane@company.com" required>
+            </div>
+          </div>
+          <div class="fld">
+            <label for="company">Company</label>
+            <input type="text" id="company" placeholder="Acme Corp">
+          </div>
+          <div class="fld">
+            <label for="interest">Interested in</label>
+            <select id="interest">
+              <option value="" disabled selected>Select a solution</option>
+              <option value="healthcare">Healthcare R&D Kit</option>
+              <option value="dubber">Nexus Dubber</option>
+              <option value="access">Nexus Access</option>
+              <option value="partnership">Partnership inquiry</option>
+              <option value="general">General inquiry</option>
+            </select>
+          </div>
+          <div class="fld">
+            <label for="message">Tell us about your project</label>
+            <textarea id="message" placeholder="What challenge are you trying to solve?"></textarea>
+          </div>
+          <div class="form-foot">
+            <span class="form-note">We respond within 2 business days.</span>
+            <button type="submit" class="btn-solid">Send Message <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-intro">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="sec-heading">Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          What industries does Nexus AI Solutions work with?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">We currently serve three verticals: pharmaceutical research and development (through our Healthcare R&D Kit), film and media production (through Nexus Dubber), and accessibility technology (through Nexus Access). Each product is purpose-built for its specific industry — we don't sell general-purpose AI toolkits or try to be everything to everyone. Our Healthcare R&D Kit works with pharmaceutical companies to accelerate the drug discovery pipeline. Nexus Dubber partners with film studios to deliver AI-powered dubbing that preserves the original performance. And Nexus Access is building the next generation of assistive technology for individuals with limited mobility. If your organization operates in any of these spaces, we'd love to discuss how we can help.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          How does Nexus Dubber differ from other AI dubbing tools?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Most AI dubbing tools on the market today use text-to-speech synthesis to generate a new voice in the target language. The result sounds artificial — it loses the actor's unique timbre, breathing patterns, emotional nuance, and the micro-expressions that make a performance feel real. Nexus Dubber works differently. Instead of generating a new voice, our system preserves the original actor's voice signature and adapts it for the target language. It handles lip-sync alignment and natural speech rhythm automatically, so the dubbed version doesn't feel translated — it feels performed. The output is production-grade, which is why studios like A24, Big Beach, Gaumont, and Neon trust it for theatrical and streaming releases. We also dramatically reduce turnaround times and costs compared to traditional voice-actor re-recording sessions, enabling simultaneous multi-language releases.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          What stage is the Healthcare R&D Kit at?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">The Healthcare R&D Kit is currently in an active pilot program with UCB Pharma, one of the world's leading biopharmaceutical companies. The pilot focuses on deploying our multi-agent AI orchestration system across the drug discovery pipeline, where it ingests and cross-references genomic databases, chemical patent libraries, clinical trial data, and electronic health records to identify novel drug targets and generate optimized molecular structures. Our target is a 50–70% reduction in the traditional 10–15 year drug development timeline. The system also automates the drafting of regulatory submissions and compliance documentation, reducing the administrative burden on research teams. We're actively seeking additional pharmaceutical and biotech partners who want to explore how AI can transform their R&D operations.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          When will Nexus Access be available?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Nexus Access is currently in active development and will be launching soon. The product uses large language models to deeply understand full computer environments — including the operating system, open applications, browser tabs, and on-screen content — and execute complex multi-step actions through natural voice commands and integrated eye-tracking. Unlike existing accessibility tools that describe interfaces or navigate them one element at a time, Nexus Access interprets the user's intent and acts on it autonomously. We're building this in close collaboration with the accessibility community. If you'd like to be considered for early access, have a partnership proposal, or want to provide feedback on the product direction, please reach out through our contact form or email us directly.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" onclick="toggleFaq(this)">
+          How can I partner with or invest in Nexus AI Solutions?
+          <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">We welcome conversations about strategic partnerships, technology integrations, distribution agreements, and investment opportunities. Whether you're a pharmaceutical company interested in piloting the Healthcare R&D Kit, a film studio or streaming platform looking to scale global distribution with Nexus Dubber, an accessibility-focused organization that wants to collaborate on Nexus Access, or an investor who sees the potential in domain-specific AI, we'd love to hear from you. Use our contact form below, or email us directly at admin@nexusaisolutionsllc.com. We respond to all inquiries within two business days.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="nav-logo" style="text-decoration:none">
+          <span class="logo-mark"><img src="data:image/png;base64,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" alt="Nexus AI"></span> Nexus AI Solutions
+        </a>
+        <p>We harness the power of artificial intelligence to drive innovation, efficiency, and accessibility across healthcare, entertainment, and assistive technology. Our mission is to create AI-driven solutions that empower businesses and individuals alike.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Solutions</h4>
+        <ul>
+          <li><a href="#solutions">Healthcare R&D Kit</a></li>
+          <li><a href="#solutions">Nexus Dubber</a></li>
+          <li><a href="#solutions">Nexus Access</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-      </nav><!-- #nav-menu-container -->
-    </div>
-  </header><!-- #header -->
-
-  <!--==========================
-    Intro Section
-  ============================-->
-  <section id="intro">
-
-    <div class="intro-content">
-      <h2>Innovating AI Solutions<br>for Enterprises & Individuals</h2>
-      <!-- <div>
-        <a href="#about" class="btn-get-started scrollto">Learn More</a>
-        <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>
-      </div> -->
-    </div>
-
-    <div id="intro-carousel" class="owl-carousel" >
-      <div class="item" style="background-image: url('img/intro-carousel/1.jpg');"></div>
-      <div class="item" style="background-image: url('img/intro-carousel/2.jpg');"></div>
-      <div class="item" style="background-image: url('img/intro-carousel/3.jpg');"></div>
-      <div class="item" style="background-image: url('img/intro-carousel/4.jpg');"></div>
-      <div class="item" style="background-image: url('img/intro-carousel/5.jpg');"></div>
-    </div>
-
-  </section><!-- #intro -->
-
-  <main id="main">
-
-    <!--==========================
-      About Section
-    ============================-->
-    <section id="about" class="wow fadeInUp">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 about-img">
-            <img src="img/about-img.jpg" alt="">
-          </div>
-    
-          <div class="col-lg-6 content">
-            <h2>About Nexus AI Solutions</h2>
-            <h3>Empowering Enterprises and Individuals with Cutting-Edge AI Solutions</h3>
-            <p>At Nexus AI Solutions, we harness the power of artificial intelligence to drive innovation, efficiency, and accessibility. Our mission is to create AI-driven solutions that empower businesses and individuals by automating complex tasks, enhancing productivity, and making cutting-edge technology more accessible. Whether optimizing workflows or unlocking new possibilities, we are dedicated to shaping the future of AI-driven success.</p>
-    
-            <!-- <ul>
-              <li><i class="ion-android-checkmark-circle"></i> Nexus Dubber: AI-powered dubbing solutions for movie studios and TV producers, enabling them to dub content into different languages preserving the original voice and tone of actors while adapting to multiple languages seamlessly.</li>
-              <li><i class="ion-android-checkmark-circle"></i> Nexus Together: Innovative accessibility solutions that empower individuals with disabilities to control technology using voice commands or eye motion, enabling full control over computers and phones.</li>
-              <li><i class="ion-android-checkmark-circle"></i> Nexus Secretary: An intelligent virtual assistant that helps individuals manage day-to-day tasks such as scheduling meetings, setting reminders, and finding the best deals for travel.</li>
-              <li><i class="ion-android-checkmark-circle"></i> AI Photo Restoration: Using advanced AI algorithms to restore and enhance old, damaged, or low-quality photos, bringing cherished memories back to life with remarkable detail and clarity.</li>
-            </ul> -->
-    
-          </div>
-        </div>
-    
       </div>
-    </section><!-- #about -->
-    
-
-    <!--==========================
-      Services Section
-    ============================-->
-    <section id="services">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="text-dark">Services</h2>
-          <p>Nexus AI Solutions LLC is dedicated to developing cutting-edge AI solutions tailored for enterprise needs. Our mission is to enhance accessibility, automation, and content transformation through generative AI and agentic AI. With a commitment to innovation, we empower businesses and individuals to achieve more.</p>
-        </div>
-    
-        <div class="row">
-    
-          <div class="col-lg-6">
-            <div class="box wow fadeInLeft">
-              <div class="icon"><i class="fa fa-headphones"></i></div>
-              <h4 class="title"><a href="">Nexus Dubber</a></h4>
-              <p class="description">AI-powered dubbing solutions for movie studios and TV producers, enabling them to dub content into different languages preserving the original voice and tone of actors while adapting to multiple languages seamlessly.</p>
-            </div>
-          </div>
-    
-          <div class="col-lg-6">
-            <div class="box wow fadeInRight">
-              <div class="icon"><i class="fa fa-wheelchair"></i></div>
-              <h4 class="title"><a href="">Nexus Access</a></h4>
-              <p class="description">Our accessibility solution uses state-of-the-art LLM technology to understand computer environments and execute actions via voice commands and eye-tracking, empowering individuals with disabilities to control their devices effortlessly.</p>
-            </div>
-          </div>
-    
-          <div class="col-lg-6">
-            <div class="box wow fadeInLeft" data-wow-delay="0.2s">
-              <div class="icon"><i class="fa fa-tasks"></i></div>
-              <h4 class="title"><a href="">Nexus Secretary</a></h4>
-              <p class="description">An intelligent AI assistant designed to streamline your daily tasks—manage your schedule, organize meetings, and effortlessly find the best travel deals. With its intuitive capabilities, it helps you save time and stay organized, making your day-to-day life more efficient and stress-free.</p>
-            </div>
-          </div>
-    
-          <div class="col-lg-6">
-            <div class="box wow fadeInRight" data-wow-delay="0.2s">
-              <div class="icon"><i class="fa fa-image"></i></div>
-              <h4 class="title"><a href="">Nexus Photo Restoration</a></h4>
-              <p class="description">Restore and enhance old, damaged, or low-quality photos with advanced AI algorithms, bringing your cherished memories back to life. Our technology helps recover lost details and improves clarity, ensuring your photos are restored to their original beauty with remarkable precision.</p>
-            </div>
-          </div>
-    
-        </div>
-    
-      </div>
-    </section><!-- #services -->
-
-    <!--==========================
-      Call To Action Section
-    ============================-->
-    <section id="call-to-action" class="wow fadeInUp">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-9 text-center text-lg-left">
-            <h3 class="cta-title">Limited Time Offer</h3>
-            <p class="cta-text">Don't miss out on our <b>limited-time offer</b>! For a short period, we're providing exclusive discounts on our AI solutions for both enterprises and individuals. Whether you're looking to streamline operations, enhance efficiency, or leverage cutting-edge AI technology, now is the perfect time to get started. Take advantage of this special deal before it expires—contact us today to learn more!</p>
-          </div>
-          <div class="col-lg-3 cta-btn-container text-center">
-            <a class="cta-btn align-middle" href="#contact">Contact US</a>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- #call-to-action -->
-    
-
-    <!--==========================
-      Clients Section
-    ============================-->
-    <section id="clients" class="wow fadeInUp">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="text-dark">Clients</h2>
-          <p>We are proud to work with industry leaders, enterprises, and innovators who trust Nexus AI Solutions LLC to power their AI-driven transformations. From entertainment studios to accessibility advocates and global businesses, our AI solutions are making an impact across industries.</p>
-        </div>
-
-        <div class="owl-carousel clients-carousel">
-          <img src="img/clients/client-1.png" alt="">
-          <img src="img/clients/client-2.png" alt="">
-          <img src="img/clients/client-3.png" alt="">
-          <img src="img/clients/client-4.png" alt="">
-          <img src="img/clients/client-5.png" alt="">
-          <img src="img/clients/client-6.png" alt="">
-          <img src="img/clients/client-7.png" alt="">
-          <img src="img/clients/client-8.png" alt="">
-        </div>
-
-      </div>
-    </section><!-- #clients -->
-
-    <!--==========================
-      Our Portfolio Section
-    ============================-->
-    <!-- <section id="portfolio" class="wow fadeInUp">
-      <div class="container">
-        <div class="section-header">
-          <h2>Our Portfolio</h2>
-          <p>Sed tamen tempor magna labore dolore dolor sint tempor duis magna elit veniam aliqua esse amet veniam enim export quid quid veniam aliqua eram noster malis nulla duis fugiat culpa esse aute nulla ipsum velit export irure minim illum fore</p>
-        </div>
-      </div>
-
-      <div class="container-fluid">
-        <div class="row no-gutters">
-
-          <div class="col-lg-3 col-md-4">
-            <div class="portfolio-item wow fadeInUp">
-              <a href="img/portfolio/1.jpg" class="portfolio-popup">
-                <img src="img/portfolio/1.jpg" alt="">
-                <div class="portfolio-overlay">
-                  <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 1</h2></div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="portfolio-item wow fadeInUp">
-              <a href="img/portfolio/2.jpg" class="portfolio-popup">
-                <img src="img/portfolio/2.jpg" alt="">
-                <div class="portfolio-overlay">
-                  <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 2</h2></div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="portfolio-item wow fadeInUp">
-              <a href="img/portfolio/3.jpg" class="portfolio-popup">
-                <img src="img/portfolio/3.jpg" alt="">
-                <div class="portfolio-overlay">
-                  <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 3</h2></div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4">
-            <div class="portfolio-item wow fadeInUp">
-              <a href="img/portfolio/4.jpg" class="portfolio-popup">
-                <img src="img/portfolio/4.jpg" alt="">
-                <div class="portfolio-overlay">
-                  <div class="portfolio-info"><h2 class="wow fadeInUp">Portfolio Item 4</h2></div>
-                </div>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>#portfolio -->
-
-    <!--==========================
-      Testimonials Section
-    ============================-->
-    <section id="testimonials" class="wow fadeInUp">
-      <div class="container">
-        <div class="section-header">
-          <h2>Testimonials</h2>
-          <p>Our customers' success stories speak volumes. From helping movie studios preserve the authenticity of voice dubbing, to enabling greater accessibility for those with disabilities, to simplifying everyday tasks with smart AI assistants, our solutions are making a real impact. Explore the testimonials below to see how our innovative products are changing lives and businesses for the better.</p>
-        </div>
-        <div class="owl-carousel testimonials-carousel">
-
-            <div class="testimonial-item">
-              <p>
-                <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
-                We used Nexus Dubber to localize our indie film into five languages, and the results were mind-blowing! The AI perfectly captured the emotions and nuances of our actors—something we never thought possible with automated dubbing.
-                <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
-              </p>
-              <img src="img/testimonial-1.jpg" class="testimonial-img" alt="">
-              <h3>Carlos M.</h3>
-              <h4>Indie Film Director</h4>
-            </div>
-
-            <div class="testimonial-item">
-              <p>
-                <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
-                I have limited mobility, and Nexus Together has completely changed how I interact with my computer. I can browse the web, send emails, and even code—all through intuitive AI assistance. This is a game-changer for accessibility!
-                <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
-              </p>
-              <img src="img/testimonial-2.jpg" class="testimonial-img" alt="">
-              <h3>Sophia L.</h3>
-              <h4>Person with limited mobility</h4>
-            </div>
-
-            <div class="testimonial-item">
-              <p>
-                <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
-                As a startup founder, I juggle a hundred tasks daily. Nexus Secretary automates everything—from scheduling meetings to summarizing emails. It has freed up hours of my time every week!
-                <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
-              </p>
-              <img src="img/testimonial-3.jpg" class="testimonial-img" alt="">
-              <h3>Sarah H.</h3>
-              <h4>Startup Founder</h4>
-            </div>
-
-        </div>
-
-      </div>
-    </section><!-- #testimonials -->
-
-    <!--==========================
-      Our Team Section
-    ============================-->
-    <section id="team" class="wow fadeInUp">
-      <div class="container">
-        <div class="section-header">
-          <h2>Our Team</h2>
-          <p>At Nexus AI Solutions LLC, we are a team of AI innovators, engineers, and visionaries dedicated to pushing the boundaries of artificial intelligence. With expertise in generative AI, machine learning, and enterprise solutions, we create technology that transforms industries and empowers people.</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-6">
-            <div class="member">
-              <div class="pic"><img src="img/team-1.jpg" alt=""></div>
-              <div class="details">
-                <h4>Mohamed Shaaban</h4>
-                <span>CEO and CTO</span>
-                <!-- <div class="social">
-                  <a href="https://www.linkedin.com/in/mohamedshabanofficial/"><i class="fa fa-linkedin"></i></a>
-                </div> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="member">
-              <div class="pic"><img src="img/team-2.jpg" alt=""></div>
-              <div class="details">
-                <h4>Ali Hassan</h4>
-                <span>AI Engineer</span>
-                <!-- <div class="social">
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6">
-            <div class="member">
-              <div class="pic"><img src="img/team-3.jpg" alt=""></div>
-              <div class="details">
-                <h4>William Anderson</h4>
-                <span>Chief Operating Officer</span>
-                <!-- <div class="social">
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div> -->
-              </div>
-            </div>
-          </div>
-
-          <!-- <div class="col-lg-3 col-md-6">
-            <div class="member">
-              <div class="pic"><img src="img/team-4.jpg" alt=""></div>
-              <div class="details">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        </div>
-
-      </div>
-    </section><!-- #team -->
-
-    <!--==========================
-      Contact Section
-    ============================-->
-    <section id="contact" class="wow fadeInUp">
-      <div class="container">
-        <div class="section-header">
-          <h2>Contact Us</h2>
-          <p>For product demos, pricing details, or support, feel free to reach out to us. Our team is here to help you explore the best AI solutions for your needs. Whether you’re looking for a tailored offer or need assistance, we’re just a message away. Contact us via email, phone, or the form below, and we’ll be happy to assist you.</p>
-        </div>
-
-        <div class="row contact-info">
-
-          <div class="col-md-4">
-            <div class="contact-address">
-              <i class="ion-ios-location-outline"></i>
-              <h3>Address</h3>
-              <address>30 N Gould St Ste N, Sheridan, WY 82801 USA</address>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="contact-phone">
-              <i class="ion-ios-telephone-outline"></i>
-              <h3>Phone Number</h3>
-              <p><a href="tel:+155895548855">+1(251) 347-4780</a></p>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="contact-email">
-              <i class="ion-ios-email-outline"></i>
-              <h3>Email</h3>
-              <p><a href="mailto:admin@nexusaisolutionsllc.com">admin@nexusaisolutionsllc.com</a></p>
-            </div>
-          </div>
-
-        </div>
-
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2831.1677048312117!2d-106.95752532301582!3d44.79777077107071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5335fabc2a655555%3A0x3542e0a22355480!2s30%20N%20Gould%20St%20Ste.%20N%2C%20Sheridan%2C%20WY%2082801%2C%20USA!5e0!3m2!1sen!2snl!4v1741213936596!5m2!1sen!2snl" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-
-      <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2831.1677048312117!2d-106.95752532301582!3d44.79777077107071!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5335fabc2a655555%3A0x3542e0a22355480!2s30%20N%20Gould%20St%20Ste.%20N%2C%20Sheridan%2C%20WY%2082801%2C%20USA!5e0!3m2!1sen!2snl!4v1741213936596!5m2!1sen!2snl" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
-
-      <!-- <div id="google-map" data-latitude="40.713732" data-longitude="74.0092704"></div> -->
-
-      <!-- <div class="container">
-        <div class="form">
-          <div id="sendmessage">Your message has been sent. Thank you!</div>
-          <div id="errormessage"></div>
-          <form action="" method="post" role="form" class="contactForm">
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group col-md-6">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                <div class="validation"></div>
-              </div>
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-              <div class="validation"></div>
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-              <div class="validation"></div>
-            </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
-          </form>
-        </div>
-
-      </div> -->
-    </section><!-- #contact -->
-
-  </main>
-
-  <!--==========================
-    Footer
-  ============================-->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong>Nexus AI Solutions LLC</strong>. All Rights Reserved.
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:admin@nexusaisolutionsllc.com">Email Us</a></li>
+          <li><a href="tel:+12513474780">(251) 347-4780</a></li>
+          <li><a href="https://www.linkedin.com/company/106507613/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://x.com/nexusaisols" target="_blank" rel="noopener">X (Twitter)</a></li>
+        </ul>
       </div>
     </div>
-  </footer><!-- #footer -->
-  
+    <div class="foot-bottom">
+      <span class="foot-copy">&copy; 2026 Nexus AI Solutions LLC. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
 
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<script>
+function toggleTheme() {
+  var root = document.documentElement;
+  var current = root.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('nexus-theme', next); } catch(e) {}
+}
+(function() {
+  try {
+    var saved = localStorage.getItem('nexus-theme');
+    document.documentElement.setAttribute('data-theme', saved || 'light');
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
 
-  <!-- JavaScript Libraries -->
-  <script src="lib/jquery/jquery.min.js"></script>
-  <script src="lib/jquery/jquery-migrate.min.js"></script>
-  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="lib/easing/easing.min.js"></script>
-  <script src="lib/superfish/hoverIntent.js"></script>
-  <script src="lib/superfish/superfish.min.js"></script>
-  <script src="lib/wow/wow.min.js"></script>
-  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="lib/magnific-popup/magnific-popup.min.js"></script>
-  <script src="lib/sticky/sticky.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>
-  <!-- Contact Form JavaScript File -->
-  <script src="contactform/contactform.js"></script>
+function toggleFaq(btn) {
+  var item = btn.parentElement;
+  var answer = item.querySelector('.faq-answer');
+  var isOpen = item.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.faq-answer').style.maxHeight = null;
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
 
-  <!-- Template Main Javascript File -->
-  <script src="js/main.js"></script>
-
-</body>
-</html>
+function handleSubmit(e) {
+  e.preventDefault();
+  var btn = e.target.querySelector('button[type="submit"]');
+  var orig = btn.innerHTML;
+  btn.textContent = 'Sent ✓';
+  btn.style.background = '#1A7A6A';
+  btn.disabled = true;
+  setTimeout(function() { btn.innerHTML = orig; btn.style.background = ''; btn.disabled = false; e.target.reset(); }, 3000);
+}
+</script>
